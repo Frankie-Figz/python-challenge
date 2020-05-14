@@ -62,7 +62,7 @@ print("--------------------------------")
 
 print(f"Total months: = {str(len(financeData)-1)}")
 print(f"Total: = {totalProfit}")
-print(f"Average Change: = {str(averageChange)}")
-print(f"Greatest Incresae in Profits: {financeData[increaseDate][0]} {maxProfitIncrease}")
-print(f"Greatest Incresae in Profits: {financeData[decreaseDate][0]} {maxProfitDecrease}")
+print("Average Change: = {:f}".format(str(averageChange)))
+print(f"Greatest Increase in Profits: {financeData[increaseDate][0]} {maxProfitIncrease}")
+print(f"Greatest decrease in Profits: {financeData[decreaseDate][0]} {maxProfitDecrease}")
       
