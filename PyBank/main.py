@@ -31,6 +31,7 @@ with open(csvpath) as csvfile:
     for row in csvreader:
         print(row)
         financeData.append(row)
+    
         
 n = 0
 maxProfitIncrease = 0
@@ -62,7 +63,12 @@ print("--------------------------------")
 
 print(f"Total months: = {str(len(financeData)-1)}")
 print(f"Total: = {totalProfit}")
-print("Average Change: = {:f}".format(str(averageChange)))
+
+#print(f"Average Change: = {str(averageChange)}")
+
+averageChange = format(averageChange, '.2e')
+
+print(f"Average Change: = {averageChange}")
 print(f"Greatest Increase in Profits: {financeData[increaseDate][0]} {maxProfitIncrease}")
 print(f"Greatest decrease in Profits: {financeData[decreaseDate][0]} {maxProfitDecrease}")
       
