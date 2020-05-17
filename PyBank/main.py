@@ -8,6 +8,11 @@ Created on Wed May 13 20:46:08 2020
 # Module for reading CSV files
 import csv
 
+
+def printScreenFile(message):
+    print(message)
+    writer.writerow([message])
+
 financeData=[]
 
 csvpath = './Resources/budget_data.csv'
@@ -57,18 +62,27 @@ for row in range(1, len(financeData)):
         maxProfitDecrease = profitChange
         decreaseDate = int(row)
 averageChange = totalProfitChange / (len(financeData)-2)
-        
-print("Financial Analysis")
-print("--------------------------------")
 
-print(f"Total months: = {str(len(financeData)-1)}")
-print(f"Total: = {totalProfit}")
+# Set variable for output file
+output_file = "./analysis/pyBank.csv"
 
-#print(f"Average Change: = {str(averageChange)}")
+#  Open the output file
+with open(output_file, "w", newline='') as datafile:
+    writer = csv.writer(datafile, delimiter=' ')
+      
+    printScreenFile("Financial Analysis")
+    printScreenFile("--------------------------------")
+    
+    printScreenFile(f"Total months: = {str(len(financeData)-1)}")
+    printScreenFile(f"Total: = {totalProfit}")
+    
+    #print(f"Average Change: = {str(averageChange)}")
+    
+    averageChange = format(averageChange, '.2f')
+    
+    printScreenFile(f"Average Change: = {averageChange}")
+    printScreenFile(f"Greatest Increase in Profits: {financeData[increaseDate][0]} {maxProfitIncrease}")
+    printScreenFile(f"Greatest decrease in Profits: {financeData[decreaseDate][0]} {maxProfitDecrease}")
 
-averageChange = format(averageChange, '.2e')
 
-print(f"Average Change: = {averageChange}")
-print(f"Greatest Increase in Profits: {financeData[increaseDate][0]} {maxProfitIncrease}")
-print(f"Greatest decrease in Profits: {financeData[decreaseDate][0]} {maxProfitDecrease}")
       
