@@ -39,7 +39,7 @@ with open(csvpath) as csvfile:
         voterCast.append(row[2])
 
 totalVotes = len(voterCast)
-print(totalVotes)
+#print(totalVotes)
 
 filteredCandidates = set(voterCast)
 
@@ -52,13 +52,31 @@ for candidate in filteredCandidates:
     for vote in voterCast:
         if candidate == vote:
          voterTally[candidate][1] = int(voterTally[candidate][1]) + 1
-    voterTally[candidate][0] = float(100 * voterTally[candidate][1] / totalVotes)
+    voterTally[candidate][0] = round(float(100 * voterTally[candidate][1] / totalVotes),3)
 #for candidate in voterTally:
-    
 
-# with open(output_file, "w", newline='') as datafile:
-#     writer = csv.writer(datafile, delimiter=' ')
-#     printScreenFile("Election Results")
-#     printScreenFile("--------------------------------")
-#     printScreenFile(f"Total Votes: {totalVotes}")
-#     print
+voterTally = {k: v for k, v in sorted(voterTally.items(), key = lambda item: item[1], reverse = True)}
+
+with open(output_file, "w", newline='') as datafile:
+    writer = csv.writer(datafile, delimiter=' ')
+    printScreenFile("Election Results")
+    printScreenFile("--------------------------------")
+    printScreenFile(f"Total Votes: {totalVotes}")
+    printScreenFile("--------------------------------")
+    for candidate in voterTally.keys():
+        printScreenFile(f"{candidate}: {voterTally[candidate][0]} % ({voterTally[candidate][1]})")
+    printScreenFile("--------------------------------")
+
+    printScreenFile(f"Winner: {list(voterTally)[0]}")
+
+    printScreenFile("--------------------------------")
+
+
+#now to sort the condidates by vote %
+
+#This returns a list.  Don't want that.
+#voterTally = [(key, value) for (key, value) in sorted(voterTally.items(), key = lambda x: x[1], reverse = True )]
+#voterTally = [k: v for k, v in sorted(voterTally.items(), key = lambda item: item[1])]
+
+#below gives a tuple.  Don't want that.
+#voterTally = sorted(voterTally.items(), key = lambda item: item[1], reverse = True)
